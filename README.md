@@ -63,6 +63,42 @@ Now humanize this text:
 
 Humanizer follows the sample's rhythm, word choice, punctuation, and deliberate quirks, including dashes if you use them.
 
+### Standalone Python CLI
+
+You can also run Humanizer as a standalone script without an agent framework. It uses Groq or any OpenAI-compatible API, powered by the rules in `SKILL.md`.
+
+1. Install dependencies:
+
+```bash
+pip install groq
+```
+
+2. Add your API key to a `.env` file or export it:
+
+```bash
+export GROQ_API_KEY="your-api-key"
+```
+
+3. Run the script on text:
+
+```bash
+python humanize.py "Paste text here"
+```
+
+4. Run the script on a Markdown or LaTeX file:
+
+```bash
+python humanize.py --file paper.tex --out paper_humanized.tex
+```
+
+Use `--sample` to match your writing style:
+
+```bash
+python humanize.py --file draft.md --sample my_style.md --out final.md
+```
+
+For long research papers, `scripts/humanize_sections.py` handles section-by-section batching. See [`DATA/README.md`](DATA/README.md) for an example applied to an IEEE LaTeX paper.
+
 ## How it works
 
 A language model writes whatever is most likely to come next, so by default it makes the choice that fits the widest range of readers and subjects. A person chooses for one reader and one subject. Every tell Humanizer looks for is a form of that default choice: a sentence that signals importance instead of adding a fact, rhythm or formatting applied by rule, an ordinary fact dressed as a pivotal one, or text left over from the chat.
